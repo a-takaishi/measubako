@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>目安箱</title>
+    <style>
+h1 {
+    text-align: center;
+}
+.m_section {
+    text-align: center;
+}
+.m_text {
+    display: block;
+    margin: auto;
+    margin-top: 15px;
+    height: 150px;
+    width: 300px;
+}
+.m_button {
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    padding: 15px 50px;
+}
+    </style>
+</head>
+<body>
+<h1>目安箱</h1>
+<section class="m_section">
+    <label>悩みやチョットした意見どしどし下さい</label>
+    <textarea class="m_text"></textarea>
+    <button class="m_button" onclick="post_message();">投稿</button>
+</section>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    function post_message(){
+        const endpoint = "https://script.google.com/macros/s/AKfycbx_zkleir8xsj_drtH_S7J4IrXxgYPxPrYUGacVmpEfiWEi5tfJ/exec";
+        const text = $('.m_text').val();
+        // gas にメッセージを送る
+        $.ajax({
+            type: 'GET',
+            url: endpoint,
+            dataType: 'jsonp',
+            data: {
+                text: text
+            },
+            success: () => {
+                alert('投函しました。');
+            }
+        });
+    }
+
+</script>
+</body>
+</html>
